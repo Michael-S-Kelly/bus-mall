@@ -1,6 +1,6 @@
 'use strict';
 
-//var lastSet = [];
+var lastSet = [];
 var totCl = 0;
 //create body main
 var mainEL = document.getElementById('mainStuff');
@@ -13,7 +13,9 @@ var firstImgEl = document.createElement('img');
 var secondImgEl = document.createElement('img');
 var thirdImgEl = document.createElement('img');
 var cmEl = document.createElement('ul');
+cmEl.id = 'pollResults';
 mainEL.appendChild(div1El);
+mainEL.appendChild(cmEl);
 div1El.appendChild(firstImgEl);
 div1El.appendChild(secondImgEl);
 div1El.appendChild(thirdImgEl);
@@ -22,6 +24,7 @@ firstImgEl.id = 'firstImg';
 secondImgEl.id = 'secondImg';
 thirdImgEl.id = 'thirdImg';
 titleH1El.id = 'request';
+
 
 
 var products = [];
@@ -74,35 +77,44 @@ console.log(products);
 //check to make sure index is unique (doesn't match the last 6 indexes)
 function randImg() {
   var firstRand = Math.floor(Math.random() * products.length);
-  //while (firstRand in lastSet) {
-  //firstRand = Math.floor(Math.random() * products.length);
-  //}
+  while (firstRand in lastSet) {
+    firstRand = Math.floor(Math.random() * products.length);
+  }
 
   var secondRand = Math.floor(Math.random() * products.length);
-  //while (firstRand in lastSet || secondRand !== firstRand) {
-  //econdRand = Math.floor(Math.random() * products.length);
-  //}
+  while (firstRand in lastSet || secondRand === firstRand) {
+    secondRand = Math.floor(Math.random() * products.length);
+  }
 
   var thirdRand = Math.floor(Math.random() * products.length);
-  //while (firstRand in lastSet || thirdRand !== firstRand || secondRand) {
-  //thirdRand = Math.floor(Math.random() * products.length);
-  //}
+  while (firstRand in lastSet || thirdRand === firstRand || thirdRand === secondRand) {
+    thirdRand = Math.floor(Math.random() * products.length);
+  }
 
   firstImgEl.src = products[firstRand].catPic;
   secondImgEl.src = products[secondRand].catPic;
   thirdImgEl.src = products[thirdRand].catPic;
-
+  lastSet[0] = firstRand;
+  lastSet[1] = secondRand;
+  lastSet[2] = thirdRand;
+  
   //add ++ to click total
   totCl++;
-
+  
   //return to generate random index until click total == 25
   if (totCl === 25) {
     firstImgEl.removeEventListener('click', randImg);
     secondImgEl.removeEventListener('click', randImg);
     thirdImgEl.removeEventListener('click', randImg);
-
+    
+    console.log(lastSet[0]);
+    console.log(lastSet[1]);
+    console.log(lastSet[2]);
     results();
   }
+  // this.view[firstRand]++;
+  // this.view[secondRand]++;
+  // this.view[thirdRand]++;
 }
 
 randImg();
@@ -111,7 +123,31 @@ function results(){
   for (var i = 0; i < products.length; i++) {
     var listEl = document.createElement('li');
     listEl.textContent = 'There are ' + products[i].votes + ' votes for the ' + products[i].name + ' and ' + products[i].views + 'views';
+    var resultsEl = document.getElementById('results').getContext('2d');
+    var resultsChart = new RChart(resultsEl, {
+      type: 'bar',
+      data: {
+        labels: this.name,
+        datasets: [{
+          label: '# of Votes',
+          data: this.votes,
+          backgroundColor: ['Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 0.2)'],
+          borderColor: 'rgba(255,255,255,1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero:true
+            }
+          }]
+        }
+      }
+    });
     cmEl.appendChild(listEl);
+    mainEL.appendChild(resultsEl);
   }
 }
 
