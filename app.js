@@ -1,118 +1,120 @@
 'use strict';
 
-var products = [],
+//var lastSet = [];
+var totCl = 0;
+//create body main
+var mainEL = document.getElementById('mainStuff');
+var div1El = document.createElement('div');
+var titleH1El = document.createElement('h1');
+mainEL.appendChild(titleH1El);
+titleH1El.textContent = 'Please click on your favorite product of the three choices bellow.';
+div1El.id = 'div1';
+var firstImgEl = document.createElement('img');
+var secondImgEl = document.createElement('img');
+var thirdImgEl = document.createElement('img');
+var cmEl = document.createElement('ul');
+mainEL.appendChild(div1El);
+div1El.appendChild(firstImgEl);
+div1El.appendChild(secondImgEl);
+div1El.appendChild(thirdImgEl);
+//insert title request
+firstImgEl.id = 'firstImg';
+secondImgEl.id = 'secondImg';
+thirdImgEl.id = 'thirdImg';
+titleH1El.id = 'request';
 
-function Product(name, src) {
+
+var products = [];
+
+function Product(name, catPic) {
   this.name = name; //name of product
-  this.src = src; //href of object
-  this.votesForProduct = 0; //number of votes received for product
-  this.totalClicks = 0;
+  this.catPic = catPic; //href of object
+  this.votes = 0; //number of votes received for product
+  this.views = 0;
   products.push(this);
-
-  this.render;
-
 }
 
-function title() { //generate function to give directions to the user
-  var mainEL = document.getElementById('mainStuff');
-  var titleH1El = document.createElement('h1');
-  mainEL.appendChild(titleH1El);
-  titleH1El.textContent = 'Please click on your favorite product of the three choices bellow.';
-}
 
-title();
+new Product ('R2D2 Carry-On Bag', './assets/bag.jpg');
+new Product ('Banana Slicer', './assets/banana.jpg');
+new Product ('Bathroom iPad Holder', './assets/bathroom.jpg');
+new Product ('Boots', './assets/boots.jpg');
+new Product ('Breakfast Combo Unit', './assets/breakfast.jpg');
+new Product ('Meatball Bubblegum', './assets/bubblegum.jpg');
+new Product ('Chair', './assets/chair.jpg');
+new Product ('Cthulhu Play Figure', './assets/cthulhu.jpg');
+new Product ('Duck Mask for Dogs', './assets/dogduck.jpg');
+new Product ('Can of Dragon Meat', './assets/dragon.jpg');
+new Product ('Pens with Eating Utencil Caps', './assets/pen.jpg');
+new Product ('Dust Mop for Pets', './assets/pet-sweep.jpg');
+new Product ('Pizza Scissors', './assets/scissors.jpg');
+new Product ('Shark Sleeping Bag', './assets/shark.jpg');
+new Product ('Dust Mop for Babies', './assets/sweep.png');
+new Product ('Can of Unicorn Meat', './assets/unicorn.jpg');
+new Product ('Robotic Tenticle USB drive', './assets/usb.gif');
+new Product ('Reverse Angled Watering Can', './assets/water-can.jpg');
+new Product ('Wine Connoisseur\'s Wine Glass', './assets/wine-glass.jpg');
+
+
+
+console.log(products);
 
 //create body header
 //create body footer
-//create body main
-//insert title request
 //generate random index
-
-function getRandomIndex() {
-  var i = 0;
-  var postedImg = [];
-  var exemptProd = [];
-
-  while(postedImg.length < 3) {
-    var prodIndex = Math.round(Math.random * products.length);
-    postedImg.push(products[prodIndex]);
-  }
-  console.log(postedImg[0]);
-  console.log(postedImg[1]);
-  console.log(postedImg[2]);
-  console.log(postedImg[3]);
-  
-};
-
-getRandomIndex();
-
-//check to make sure index is unique (doesn't match the last 9 indexes)
-//get image based on index number
 //render image
-//return to the begining of generate random index loop two more times for a total of 3 images
 //wait for user to select image
 //record vote
-//add ++ to click total
-//return to generate random index until click total == 25
 //generate vote totals
 //generate reset button
 //wait for user to select reset
 //refresh website
 
+//get image based on index number
+//check to make sure index is unique (doesn't match the last 6 indexes)
+function randImg() {
+  var firstRand = Math.floor(Math.random() * products.length);
+  //while (firstRand in lastSet) {
+  //firstRand = Math.floor(Math.random() * products.length);
+  //}
 
-Product.prototype.votesForProduct = function() {
+  var secondRand = Math.floor(Math.random() * products.length);
+  //while (firstRand in lastSet || secondRand !== firstRand) {
+  //econdRand = Math.floor(Math.random() * products.length);
+  //}
 
-}
+  var thirdRand = Math.floor(Math.random() * products.length);
+  //while (firstRand in lastSet || thirdRand !== firstRand || secondRand) {
+  //thirdRand = Math.floor(Math.random() * products.length);
+  //}
 
-/*
-var tracker = {
-  products: [],
-  totalClicks: 0,
-  for(i = 0; i < clicks.length; i++){
-    this.votesForProduct +=;
-    totalClicks = +=;
+  firstImgEl.src = products[firstRand].catPic;
+  secondImgEl.src = products[secondRand].catPic;
+  thirdImgEl.src = products[thirdRand].catPic;
+
+  //add ++ to click total
+  totCl++;
+
+  //return to generate random index until click total == 25
+  if (totCl === 25) {
+    firstImgEl.removeEventListener('click', randImg);
+    secondImgEl.removeEventListener('click', randImg);
+    thirdImgEl.removeEventListener('click', randImg);
+
+    results();
   }
 }
 
+randImg();
 
-  getUniqueImages: function() {
+function results(){
+  for (var i = 0; i < products.length; i++) {
+    var listEl = document.createElement('li');
+    listEl.textContent = 'There are ' + products[i].votes + ' votes for the ' + products[i].name + ' and ' + products[i].views + 'views';
+    cmEl.appendChild(listEl);
+  }
+}
 
-  },
-
-  renderImages: function() {
-
-  },
-
-  addClickTracker: function() {
-
-  },
-
-  clickHandler: function() {
-
-  },
-};
-
-(function createProducts() {
-
-})()
-*/
-
-new Products ('R2D2 Carry-On Bag', /asset/bag.jpg);
-new Products ('Banana Slicer', /asset/banana.jpg);
-new Products ('Bathroom iPad Holder', /asset/bathroom.jpg);
-new Products ('Boots', /asset/boots.jpg);
-new Products ('Breakfast Combo Unit', /asset/breakfast.jpg);
-new Products ('Meatball Bubblegum', /asset/bubblegum.jpg);
-new Products ('Chair', /asset/chair.jpg);
-new Products ('Cthulhu Play Figure', /asset/cthulhu.jpg);
-new Products ('Duck Mask for Dogs', /asset/dog-duck.jpg);
-new Products ('Can of Dragon Meat', /asset/dragon.jpg);
-new Products ('Pens with Eating Utencil Caps', /asset/pen.jpg);
-new Products ('Dust Mop for Pets', /asset/pet-sweep.jpg);
-new Products ('Pizza Scissors', /asset/scissors.jpg);
-new Products ('Shark Sleeping Bag', /asset/shark.jpg);
-new Products ('Dust Mop for Babies', /asset/sweep.png);
-new Products ('Can of Unicorn Meat', /asset/unicorn.jpg);
-new Products ('Robotic Tenticle USB drive', /asset/usb.gif);
-new Products ('Reverse Angled Watering Can', /asset/water-can.jpg);
-new Products ('Wine Connoisseur\'s Wine Glass', /asset/wine-glass.jpg);
+firstImgEl.addEventListener('click', randImg);
+secondImgEl.addEventListener('click', randImg);
+thirdImgEl.addEventListener('click', randImg);
