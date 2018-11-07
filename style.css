@@ -1,3 +1,54 @@
-#mainStuff {
-    background-color: red;
+#firstImg {
+    position: relative;
+    /* top: 20px; */
+    left: 2%;
+    right: 95%;
+    top: 50%;
+    bottom: 50%;
+    border: thin red;
+    height: 90%;
 }
+#secondImg {
+    position: relative;
+    /* top: 20px; */
+    left: 5%;
+    right: 95%;
+    top: 55%;
+    bottom: 45%;
+    border: thin red;
+    height: 90%;
+
+}
+#thirdImg {
+    position: relative;
+    /* top: 20px; */
+    left: 8%;
+    right: 92%;
+    /* top: 50%; */
+    bottom: 50%;
+    border: thin red;
+    height: 90%;
+
+}
+#request {
+    position: relative;
+    top: 10px;
+    left: 200px;
+    font-size: 40px;
+}
+#div1 {
+    position: relative;
+    background-color: rgb(255, 0, 0);
+    width: 64%;
+    height: 120%;
+    left: 30%;
+    top: 90px;
+    border: red;
+}
+
+#pollResults {
+    list-style: none;
+    top: -220px;
+    left: 2%;
+    Float: left;
+    position: relative;
