@@ -151,6 +151,7 @@ function displayResults() {
 
   return new Chart(ctx, chartConfig);
 }
+
 //add event listeners to receive the value of the callback function
 firstImg.addEventListener('click', handleImageClick);
 secondImg.addEventListener('click', handleImageClick);

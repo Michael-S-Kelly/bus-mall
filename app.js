@@ -199,6 +199,28 @@ function results(){
   return new Chart(resultsEl, rChart);
 }
 
+if(localStorage.getItem('voteData')) {
+  var voteData = localStorage.getItem('voteDate');
+  myChart.data.datasets[0].data = JSON.parse(voteData);
+
+  myChart.update();
+}
+
+div1El.addEventListener('click', function(event) {
+
+
+var eventId = event.target.id;
+var votesIdx = products.votes.indexOf(eventId);
+
+if (votesIdx !== -1) {
+  myChart.data.datasets[0].products.votes);
+  myChart.update();
+
+  var dataRecord = JSON.stringify(myChart.data.datasets[0].products.data);
+  localStorage.setItem('voteData', dataRecord);
+}
+})
+
 firstImgEl.addEventListener('click', imgClk);
 secondImgEl.addEventListener('click', imgClk);
 thirdImgEl.addEventListener('click', imgClk);
