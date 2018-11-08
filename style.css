@@ -56,4 +56,9 @@
 
 #chart1 {
     border: thin black;
+    width: 300px;
+}
+
+chart {
+    width: 300px;
 }

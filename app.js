@@ -70,9 +70,6 @@ new Product ('Reverse Angled Watering Can', './assets/water-can.jpg');
 new Product ('Wine Connoisseur\'s Wine Glass', './assets/wine-glass.jpg');
 
 
-
-console.log(products);
-
 //create body header
 //create body footer
 //generate random index
@@ -106,6 +103,10 @@ function randImg() {
   firstImgEl.src = products[firstRand].catPic;
   secondImgEl.src = products[secondRand].catPic;
   thirdImgEl.src = products[thirdRand].catPic;
+
+  firstImgEl.name = products[firstRand].name;
+  secondImgEl.name = products[secondRand].name;
+  thirdImgEl.name = products[thirdRand].name;
   
   products[firstRand].views++;
   products[secondRand].views++;
@@ -113,7 +114,7 @@ function randImg() {
   
   totCl++;
   
-  if (totCl > 5) {
+  if (totCl > 25) {
     firstImgEl.removeEventListener('click', imgClk);
     secondImgEl.removeEventListener('click', imgClk);
     thirdImgEl.removeEventListener('click', imgClk);
@@ -121,12 +122,16 @@ function randImg() {
     results();
   }
 }
-
+console.log('before function call');
 function imgClk(event) {
-  console.log(event.target.alt);
+  console.log('after function call before loop');
   for (var i = 0; i < products.length; i++) {
-    if (event.target.alt === products[i].name) {
+    console.log('after loop is called before if arguement');
+    console.log(JSON.stringify(event.target));
+    if (event.target.name === products[i].name) {
+      console.log('after if argument before vote is recorded');
       products[i].votes++;
+      console.log('after votes are recorded', products[i].votes);
     }
   }
   randImg();
@@ -136,33 +141,34 @@ randImg();
 
 function results(){ 
   for (var i = 0; i < products.length; i++) {
-    var resultsEl = document.getElementById('results1');
-    var crtEl = document.createElement('chart').getContext('2d');
-    resultsEl.appendChild(crtEl);
-    crtEl.id = 'chart1';
+    var resultsEl = document.getElementById('results1').getContext('2d');
+    //console.log('after resultsEl is established');
+    // var crtEl = document.createElement('chart').getContext('2d');
+    // resultsEl.appendChild(crtEl);
+    // crtEl.id = 'chart1';
     
-    var names;
+    var names = [];
     
     //var listEl = document.createElement('li');
     //listEl.textContent = 'There are ' + products[i].votes + ' votes for the ' + products[i].name + ' and ' + products[i].views + 'views';
     
     for (var j = 0; j < products.length; j++) {
-      names.push(products[i].name);
+      names.push(products[j].name);
     }
     
     var votes = [];
     for (var k = 0; k < products.length; k++) {
-      votes.push(products[j].votes);
+      votes.push(products[k].votes);
     }
     
     var bgClrs =[];
     for (var l = 0; l < products.length; l++) {
-      bgClrs.push(products[k].bgCol);
+      bgClrs.push(products[l].bgCol);
     }
     
     var bdrClrs = [];
     for (var m = 0; m < products.length; m++) {
-      bdrClrs.push(products[k].bdrCol);
+      bdrClrs.push(products[m].bdrCol);
     }
 
     var rChart = {
