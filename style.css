@@ -31,34 +31,53 @@
 
 }
 #request {
-    position: relative;
+    /* position: relative; */
     top: 10px;
     left: 200px;
     font-size: 40px;
 }
 #div1 {
-    position: relative;
+    /* position: relative; */
     background-color: rgb(255, 0, 0);
     width: 64%;
     height: 120%;
     left: 30%;
-    top: 90px;
+    top: 50px;
     border: red;
 }
 
-#pollResults {
+/* #pollResults {
     list-style: none;
     top: -220px;
     left: 2%;
     Float: left;
     position: relative;
-}
+} */
 
-#chart1 {
+/* #chart1 {
     border: thin black;
     width: 300px;
+} */
+
+
+element.style {
+    position: relative;
+    height: 400px;
+    width: 800px;
+    top: 800px;
+    left: 100px;
+}
+/*
+canvas {
+    display: block;
+    height: 680px;
+    width:  680px;
 }
 
-chart {
-    width: 300px;
+#div2 {
+    height: 400px;
+    width: 600px;
+    top: 800px;
+    left: 100px;
 }
+*/
